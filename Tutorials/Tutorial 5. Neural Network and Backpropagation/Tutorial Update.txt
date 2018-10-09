@@ -1,0 +1,1 @@
+In Question 1, please report training erroraccuracy and validation erroraccuracy. We are not able to report test erroraccuracy because there is no output in test data. Sorry for mistyping the word test in the line # Evaluate model performance on test data. It should be # Evaluate model performance on train data.
