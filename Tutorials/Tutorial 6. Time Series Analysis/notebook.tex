@@ -1,0 +1,1605 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Time Series Analysis}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{BT2101 Introduction to Time
+Series}\label{bt2101-introduction-to-time-series}
+
+    \subsection{1 Goal}\label{goal}
+
+In this notebook, we will explore \textbf{Time Series} including: *
+Understand non-stationary and stationary time series * Indentifying
+trend, seasonality, residual and autocorrelation * Run and fit ARMA,
+ARIMA model * Do Forecasting
+
+For the \textbf{Time Series} method, you will: * Use open-source package
+\texttt{pandas} and \texttt{statsmodels} to do time series analysis *
+Understand how to transform the non-stationary time series data into
+stationary one, and then fit with ARMA model * References:
+\href{https://www.apress.com/gp/book/9781484228227}{Haroon, D. Python
+Machine Learning Case Studies. Apress..}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} \PYZhy{}*\PYZhy{} coding:utf\PYZhy{}8 \PYZhy{}*\PYZhy{}}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{n}{sqrt}
+        \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Image}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pylab} \PY{k}{import} \PY{n}{rcParams}
+        \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{tsa}\PY{n+nn}{.}\PY{n+nn}{stattools} \PY{k}{import} \PY{n}{adfuller}
+        \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{tsa}\PY{n+nn}{.}\PY{n+nn}{stattools} \PY{k}{import} \PY{n}{acf}\PY{p}{,} \PY{n}{pacf}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
+        \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{tsa}\PY{n+nn}{.}\PY{n+nn}{arima\PYZus{}model} \PY{k}{import} \PY{n}{ARMA}\PY{p}{,} \PY{n}{ARIMA}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{explained\PYZus{}variance\PYZus{}score}
+        \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k}{import} \PY{n}{division}\PY{p}{,} \PY{n}{print\PYZus{}function}
+        \PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k}{import} \PY{n}{datetime}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \subsection{2 Time Series Analysis}\label{time-series-analysis}
+
+    \subsubsection{2.1 Stationary and Non-stationary Time
+Series}\label{stationary-and-non-stationary-time-series}
+
+A time series data \({x_t}, t=0,...\) is \textbf{weakly stationary} as
+long as: 1. \(E(x_t)\) is constant 2. \(VAR(x_t)\) is constant 3.
+\(COV(x_t, x_{t+k})\) is independent of t
+
+\textbf{Why do we care about `stationarity' of a time series?}
+
+The reason we took up this section first was that until unless our time
+series is stationary, we cannot build a time series model. In cases
+where the stationary criterion are violated, the first requisite becomes
+to stationarize the time series and then try stochastic models to
+predict this time series. There are multiple ways of bringing this
+stationarity. Some of them are Detrending, Differencing etc.
+https://www.analyticsvidhya.com/blog/2015/12/complete-tutorial-time-series-modeling/
+
+    \subsubsection{2.2 Stationarize Time
+Series}\label{stationarize-time-series}
+
+\paragraph{An additive model suggests that a time series is composed
+by}\label{an-additive-model-suggests-that-a-time-series-is-composed-by}
+
+\begin{itemize}
+\tightlist
+\item
+  Level
+\item
+  Trend
+\item
+  Seasonality
+\item
+  Random noise 
+\end{itemize}
+
+\paragraph{De-trending or Rolling}\label{de-trending-or-rolling}
+
+Remove the trend component from the time series. For example, * model
+the trend on time series: \(x_t=level+trend\times t+error\) * or mean
+aggregation: For each time stamp, calculate mean value within a neighbor
+time window
+
+And then remove the trending component and further build models on the
+rest.
+
+\paragraph{Differencing}\label{differencing}
+
+Usually we can use AR(I)MA model to remove non-stationarity and fit the
+time series data. Please refer to the lecture slides.
+
+\paragraph{A typical procedure of time series
+forecasting}\label{a-typical-procedure-of-time-series-forecasting}
+
+\begin{figure}
+\centering
+\includegraphics{procedure.jpg}
+\caption{title}
+\end{figure}
+
+    \subsubsection{2.3 Case: Financial Time Series Analysis of S\&P500
+Index}\label{case-financial-time-series-analysis-of-sp500-index}
+
+\paragraph{Dataset:}\label{dataset}
+
+The \textbf{S\&P500} index dataset can be obtained from yahoo finance
+https://sg.finance.yahoo.com/quote/\%5EGSPC/history?p=\%5EGSPC.
+
+\paragraph{References:}\label{references}
+
+{[}1{]} Haroon, D. Python Machine Learning Case Studies. Apress..
+{[}2{]} \texttt{statsmodels} module:
+https://www.statsmodels.org/dev/tsa.html
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Load dataset: You need to download s\PYZam{}p500 dataset from yahoo finance}
+        \PY{o}{\PYZpc{}}\PY{k}{pwd}
+        \PY{n}{sp500} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./\PYZca{}GSPC.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Transform Date column to date type}
+        \PY{n}{sp500}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{sp500}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}
+        \PY{n}{sp500}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{sp500}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{infer\PYZus{}datetime\PYZus{}format}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{sp500}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{n}{n}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}         Date    Adj Close
+        0 2017-01-03  2257.830078
+        1 2017-01-04  2270.750000
+        2 2017-01-05  2269.000000
+        3 2017-01-06  2276.979980
+        4 2017-01-09  2268.899902
+        5 2017-01-10  2268.899902
+        6 2017-01-11  2275.320068
+        7 2017-01-12  2270.439941
+        8 2017-01-13  2274.639893
+        9 2017-01-17  2267.889893
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Split the dataset: First 70\PYZpc{} for training, Last 30\PYZpc{} for testing}
+        \PY{n}{data\PYZus{}size} \PY{o}{=} \PY{n}{sp500}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        
+        \PY{n}{data\PYZus{}train} \PY{o}{=} \PY{n}{sp500}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{n}{data\PYZus{}size}\PY{o}{*}\PY{l+m+mf}{0.7}\PY{p}{]}
+        \PY{n}{data\PYZus{}test} \PY{o}{=} \PY{n}{sp500}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{data\PYZus{}size}\PY{o}{*}\PY{l+m+mf}{0.7}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+    \paragraph{2.3.1 Data Exploration}\label{data-exploration}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Plotting Adjusted Closing Index of Yahoo Stock on a Time Series}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{sp500}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{sp500}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adjusted Closing Index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yahoo Adjusted Closing Index \PYZhy{} Year 2017}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{locs}\PY{p}{,} \PY{n}{labels} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{setp}\PY{p}{(}\PY{n}{labels}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{45}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{Notice whether this time series data is stationary or not.
+What about trend, seasonality,
+autocorrelation?}\label{notice-whether-this-time-series-data-is-stationary-or-not.-what-about-trend-seasonality-autocorrelation}
+
+    \paragraph{2.3.2 Test on Stationary
+Condition}\label{test-on-stationary-condition}
+
+\textbf{Dickey-Fuller test}: *
+https://en.wikipedia.org/wiki/Dickey\%E2\%80\%93Fuller\_test *
+https://en.wikipedia.org/wiki/Augmented\_Dickey\%E2\%80\%93Fuller\_test
+*
+http://www.ams.sunysb.edu/\textasciitilde{}zhu/ams586/UnitRoot\_ADF.pdf
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{t}\PY{o}{=}\PY{l+m+mi}{15} \PY{c+c1}{\PYZsh{} Rolling time window, and calculate mean and standard error}
+        \PY{n}{rolmean} \PY{o}{=} \PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{rolling}\PY{p}{(}\PY{n}{window}\PY{o}{=}\PY{n}{t}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+        \PY{n}{rolstd} \PY{o}{=} \PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{rolling}\PY{p}{(}\PY{n}{window}\PY{o}{=}\PY{n}{t}\PY{p}{)}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+        \PY{n}{rolmean}\PY{p}{,} \PY{n}{rolstd}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} (0              NaN
+         1              NaN
+         2              NaN
+         3              NaN
+         4              NaN
+         5              NaN
+         6              NaN
+         7              NaN
+         8              NaN
+         9              NaN
+         10             NaN
+         11             NaN
+         12             NaN
+         13             NaN
+         14     2270.187305
+         15     2272.889974
+         16     2274.618636
+         17     2276.331299
+         18     2276.592627
+         19     2277.257308
+         20     2277.967318
+         21     2278.335986
+         22     2280.134652
+         23     2281.329329
+         24     2283.008675
+         25     2284.527344
+         26     2287.472689
+         27     2290.458691
+         28     2294.662028
+         29     2298.496029
+                   {\ldots}     
+         146    2469.552018
+         147    2471.174007
+         148    2472.344678
+         149    2473.796012
+         150    2474.750000
+         151    2474.762663
+         152    2472.413330
+         153    2470.331999
+         154    2470.060677
+         155    2469.226025
+         156    2468.578027
+         157    2465.550700
+         158    2462.447363
+         159    2459.652034
+         160    2458.062695
+         161    2455.827360
+         162    2453.614697
+         163    2451.362695
+         164    2448.918034
+         165    2447.010042
+         166    2445.914714
+         167    2448.144043
+         168    2450.492708
+         169    2449.960042
+         170    2450.022038
+         171    2449.821371
+         172    2451.916032
+         173    2456.086703
+         174    2460.627360
+         175    2463.684701
+         Name: Adj Close, Length: 176, dtype: float64, 0            NaN
+         1            NaN
+         2            NaN
+         3            NaN
+         4            NaN
+         5            NaN
+         6            NaN
+         7            NaN
+         8            NaN
+         9            NaN
+         10           NaN
+         11           NaN
+         12           NaN
+         13           NaN
+         14      5.505278
+         15      8.264886
+         16     10.256967
+         17     11.339455
+         18     11.400477
+         19     11.208970
+         20     10.976673
+         21     10.974277
+         22     11.769840
+         23     12.077716
+         24     11.824176
+         25     11.756815
+         26     11.697618
+         27     12.929022
+         28     14.306325
+         29     17.472291
+                  {\ldots}    
+         146     8.809176
+         147     6.447136
+         148     5.679833
+         149     4.773801
+         150     3.079797
+         151     3.076133
+         152     9.942918
+         153    12.777934
+         154    12.830637
+         155    12.744855
+         156    12.521284
+         157    15.807244
+         158    18.729012
+         159    20.516977
+         160    20.049121
+         161    19.582587
+         162    19.480154
+         163    18.534244
+         164    16.684689
+         165    15.055737
+         166    13.463855
+         167    14.799236
+         168    16.352882
+         169    15.942234
+         170    16.004959
+         171    15.779253
+         172    15.029120
+         173    15.847872
+         174    17.051005
+         175    19.436213
+         Name: Adj Close, Length: 176, dtype: float64)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Visualize whether mean and standard error of time series are stationary over time}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+        \PY{n}{orig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{mean} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{rolmean}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rolling Mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{std} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{rolstd}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rolling Std}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rolling Mean \PYZam{} Standard Deviation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{n}{block}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{It seems that standard error remains constant, but mean is
+changing.}\label{it-seems-that-standard-error-remains-constant-but-mean-is-changing.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Dickey\PYZhy{}Fuller test on stationary condition}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Results of Dickey\PYZhy{}Fuller Test:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Dickey\PYZhy{}Fuller test}
+        \PY{n}{dftest} \PY{o}{=} \PY{n}{adfuller}\PY{p}{(}\PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{autolag}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)} 
+        \PY{n}{dfoutput} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{dftest}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Statistic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p\PYZhy{}value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}Lags Used}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Observations Used}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{key}\PY{p}{,} \PY{n}{value} \PY{o+ow}{in} \PY{n}{dftest}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{dfoutput}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Critical Value (}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{)}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{k}{key}] = value
+        
+        \PY{n+nb}{print} \PY{p}{(}\PY{n}{dfoutput}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Results of Dickey-Fuller Test:
+Test Statistic                  -1.442525
+p-value                          0.561728
+\#Lags Used                      14.000000
+Number of Observations Used    161.000000
+Critical Value (1\%)             -3.471633
+Critical Value (5\%)             -2.879665
+Critical Value (10\%)            -2.576434
+dtype: float64
+
+    \end{Verbatim}
+
+    \paragraph{Dickey-Fuller test shows that null hypothesis
+(nonstationarity) cannot be rejected, so the time series may be
+nonstationary. If non-stationary, we cannot use AR(I)MA to fit the data,
+make inference or do forecasting. Thus, we need to make the time series
+stationary
+first.}\label{dickey-fuller-test-shows-that-null-hypothesis-nonstationarity-cannot-be-rejected-so-the-time-series-may-be-nonstationary.-if-non-stationary-we-cannot-use-arima-to-fit-the-data-make-inference-or-do-forecasting.-thus-we-need-to-make-the-time-series-stationary-first.}
+
+\paragraph{We have several ways to make time series
+stationary.}\label{we-have-several-ways-to-make-time-series-stationary.}
+
+    \paragraph{2.3.3 Make Time Series Stationary: Eliminating Trend and
+Seasonality}\label{make-time-series-stationary-eliminating-trend-and-seasonality}
+
+\textbf{Method 1. Estimating Trend and Removing It from the Original
+Series: Using Moving Average Smoothing}
+
+Moving average smoothing is similar to rolling mean in that in both
+these methods, we calculate the average of observations lying within a
+fixed window size, in order to estimate the trending at a given time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Applying Moving Average Smoothing to the Time Series Object to Plot the Trend}
+        \PY{n}{t} \PY{o}{=} \PY{l+m+mi}{15} \PY{c+c1}{\PYZsh{} Time window for Moving Average Smoothing Trend}
+        \PY{n}{moving\PYZus{}avg} \PY{o}{=} \PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{rolling}\PY{p}{(}\PY{n}{window}\PY{o}{=}\PY{n}{t}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} Trend}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Actual S\PYZam{}P500 Index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{moving\PYZus{}avg}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trend: Rolling Mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Estimated Trend: Using Moving Average Smoothing}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Remove trend from original time series: Subtract this estimated trend}
+        \PY{n}{data\PYZus{}log\PYZus{}moving\PYZus{}avg\PYZus{}diff} \PY{o}{=} \PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{moving\PYZus{}avg}
+        \PY{n}{data\PYZus{}log\PYZus{}moving\PYZus{}avg\PYZus{}diff}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{n}{n}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} 0           NaN
+        1           NaN
+        2           NaN
+        3           NaN
+        4           NaN
+        5           NaN
+        6           NaN
+        7           NaN
+        8           NaN
+        9           NaN
+        10          NaN
+        11          NaN
+        12          NaN
+        13          NaN
+        14     9.882763
+        15    25.480143
+        16    22.061296
+        17    18.358642
+        18     4.307275
+        19     1.612809
+        Name: Adj Close, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Drop missing values}
+         \PY{n}{data\PYZus{}log\PYZus{}moving\PYZus{}avg\PYZus{}diff}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{data\PYZus{}log\PYZus{}moving\PYZus{}avg\PYZus{}diff}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{n}{n}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} 14     9.882763
+         15    25.480143
+         16    22.061296
+         17    18.358642
+         18     4.307275
+         19     1.612809
+         20     1.582731
+         21     2.514112
+         22    17.285270
+         23    11.230730
+         24    10.071403
+         25    10.142578
+         26    20.397428
+         27    25.641407
+         28    33.587972
+         29    39.084049
+         30    47.361979
+         31    41.962614
+         32    42.137890
+         33    50.725863
+         Name: Adj Close, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} Evaluating Trendless Time Series for Stationary: Using Dickey\PYZhy{}Fuller test}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Results of Dickey\PYZhy{}Fuller Test:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Dickey\PYZhy{}Fuller test}
+         \PY{n}{dftest} \PY{o}{=} \PY{n}{adfuller}\PY{p}{(}\PY{n}{data\PYZus{}log\PYZus{}moving\PYZus{}avg\PYZus{}diff}\PY{p}{,} \PY{n}{autolag}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)} 
+         \PY{n}{dfoutput} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{dftest}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Statistic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p\PYZhy{}value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}Lags Used}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Observations Used}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{key}\PY{p}{,} \PY{n}{value} \PY{o+ow}{in} \PY{n}{dftest}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{dfoutput}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Critical Value (}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{)}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{k}{key}] = value
+         
+         \PY{n+nb}{print} \PY{p}{(}\PY{n}{dfoutput}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Results of Dickey-Fuller Test:
+Test Statistic                  -3.566682
+p-value                          0.006431
+\#Lags Used                      14.000000
+Number of Observations Used    147.000000
+Critical Value (1\%)             -3.475637
+Critical Value (5\%)             -2.881410
+Critical Value (10\%)            -2.577365
+dtype: float64
+
+    \end{Verbatim}
+
+    \paragraph{This time, we find that Dickey-Fuller test is significant
+(p-value\textless{}5\%). This means, after removing general trend, the
+time series data probably become
+stationary.}\label{this-time-we-find-that-dickey-fuller-test-is-significant-p-value5.-this-means-after-removing-general-trend-the-time-series-data-probably-become-stationary.}
+
+    \textbf{Method 2. Differencing}
+
+Time series datasets may contain both \textbf{trends} and
+\textbf{seasonality}, which may need to be removed prior to modeling,
+otherwise we cannot get stationary data. Trends can result in a varying
+mean over time, whereas seasonality can result in a changing variance
+over time, both which define a time series as being non-stationary.
+Stationary datasets are those that have a stable mean and variance, and
+are in turn much easier to model.
+
+Differencing is a popular and widely used data transformation for making
+time series data stationary. Differencing subtracts the time series from
+a lagged version of itself (i.e., observations at the previous
+instances). Differencing stabilizes the mean of a time series by
+removing changes in the level. Differencing, given its definition, is
+also an effective way to make the time series object stationary.
+
+We begin with first-order differencing; that is, a lag of 1 was induced
+while differencing. We can also try if a second- or third-order
+differencing can further improve the stationary nature of the time
+series object.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Applying First\PYZhy{}Order Differencing to the original time series data}
+         \PY{n}{data\PYZus{}diff} \PY{o}{=} \PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{data\PYZus{}diff}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n}{t}\PY{o}{=}\PY{l+m+mi}{30} \PY{c+c1}{\PYZsh{} Rolling time window, and calculate mean and standard error}
+         \PY{n}{rolmean} \PY{o}{=} \PY{n}{data\PYZus{}diff}\PY{o}{.}\PY{n}{rolling}\PY{p}{(}\PY{n}{window}\PY{o}{=}\PY{n}{t}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{rolstd} \PY{o}{=} \PY{n}{data\PYZus{}diff}\PY{o}{.}\PY{n}{rolling}\PY{p}{(}\PY{n}{window}\PY{o}{=}\PY{n}{t}\PY{p}{)}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Visualize whether mean and standard error of time series are stationary over time}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}orig = plt.plot(data\PYZus{}train[\PYZsq{}Adj Close\PYZsq{}], color=\PYZsq{}blue\PYZsq{},label=\PYZsq{}Original\PYZsq{})}
+         \PY{n}{diff} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data\PYZus{}diff}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Differencing}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{mean} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{rolmean}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rolling Mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{std} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{rolstd}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rolling Std}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rolling Mean \PYZam{} Standard Deviation after Differencing}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{n}{block}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Dicky\PYZhy{}Fuller test on stationary condition}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Results of Dickey\PYZhy{}Fuller Test:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Dickey\PYZhy{}Fuller test}
+         \PY{n}{dftest} \PY{o}{=} \PY{n}{adfuller}\PY{p}{(}\PY{n}{data\PYZus{}diff}\PY{p}{,} \PY{n}{autolag}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)} 
+         \PY{n}{dfoutput} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{dftest}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Statistic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p\PYZhy{}value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}Lags Used}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Observations Used}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{key}\PY{p}{,} \PY{n}{value} \PY{o+ow}{in} \PY{n}{dftest}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{dfoutput}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Critical Value (}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{)}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{k}{key}] = value
+         
+         \PY{n+nb}{print} \PY{p}{(}\PY{n}{dfoutput}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Results of Dickey-Fuller Test:
+Test Statistic                  -3.266632
+p-value                          0.016438
+\#Lags Used                      14.000000
+Number of Observations Used    160.000000
+Critical Value (1\%)             -3.471896
+Critical Value (5\%)             -2.879780
+Critical Value (10\%)            -2.576495
+dtype: float64
+
+    \end{Verbatim}
+
+    \paragraph{We see a remarkable improvement as the rolling mean and
+rolling standard deviation after differencing appear to be almost
+constant. The same was reflected by the Dickey-Fuller test as the test
+statistics come out to be much less than the 5\% critical values. The
+de-seasonality and detrending can make time series seem to be almost
+stationary in nature
+now.}\label{we-see-a-remarkable-improvement-as-the-rolling-mean-and-rolling-standard-deviation-after-differencing-appear-to-be-almost-constant.-the-same-was-reflected-by-the-dickey-fuller-test-as-the-test-statistics-come-out-to-be-much-less-than-the-5-critical-values.-the-de-seasonality-and-detrending-can-make-time-series-seem-to-be-almost-stationary-in-nature-now.}
+
+    \textbf{Method 3. Decomposition}
+
+We can also directly break the time series object into trend,
+seasonality and residuals components by visualization. This leads to the
+concept of decomposition. We hope that the residual components can be
+closer to stationary after removing trend and seasonality.
+
+Decomposition is an approach to dissect the time series data and
+visualize the detailed components. This approach helps you to know how
+to transform non-stationary time series into stationary ones. It does
+that by dividing the time series into three components: \textbf{trend},
+\textbf{seasonality}, and \textbf{residuals}. The component of interest
+in this case is the residuals (i.e., time series without trend and
+seasonality).
+
+\texttt{statsmodels} module:
+https://www.statsmodels.org/dev/generated/statsmodels.tsa.seasonal.seasonal\_decompose.html
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Decomposing the Original Time Series}
+         \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{tsa}\PY{n+nn}{.}\PY{n+nn}{seasonal} \PY{k}{import} \PY{n}{seasonal\PYZus{}decompose}
+         \PY{n}{decomposition} \PY{o}{=} \PY{n}{seasonal\PYZus{}decompose}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{freq}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{trend} \PY{o}{=} \PY{n}{decomposition}\PY{o}{.}\PY{n}{trend}
+         \PY{n}{seasonal} \PY{o}{=} \PY{n}{decomposition}\PY{o}{.}\PY{n}{seasonal}
+         \PY{n}{residual} \PY{o}{=} \PY{n}{decomposition}\PY{o}{.}\PY{n}{resid}
+         
+         \PY{c+c1}{\PYZsh{} Plot the components}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{411}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{412}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{trend}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{413}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{seasonal}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Seasonality}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{414}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{residual}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Residuals}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{We find that (1) trends are weakly linearly increasing in
+nature, (2) seasonality may exist. The seasonality is a pattern that
+repeats itself after a fixed time interval. We check the residual
+component and find it to be fairly constant over time. Now we plan to
+evaluate the residuals to see if they are stationary in nature or
+not.}\label{we-find-that-1-trends-are-weakly-linearly-increasing-in-nature-2-seasonality-may-exist.-the-seasonality-is-a-pattern-that-repeats-itself-after-a-fixed-time-interval.-we-check-the-residual-component-and-find-it-to-be-fairly-constant-over-time.-now-we-plan-to-evaluate-the-residuals-to-see-if-they-are-stationary-in-nature-or-not.}
+
+\paragraph{Note that after de-trending the time series, and you run
+Dickey-Fuller test, you may find that the transformed time series have
+already been stationary. This measn seasonality may not exert
+significant effect in this case. So you can just fit the AR(I)MA model
+on the stationary time series data. If it is still non-stationary, the
+possible reason is that seasonality has significant effect (e.g.,
+seasonal random walk). Then you need to remove seasonality from the time
+series
+data.}\label{note-that-after-de-trending-the-time-series-and-you-run-dickey-fuller-test-you-may-find-that-the-transformed-time-series-have-already-been-stationary.-this-measn-seasonality-may-not-exert-significant-effect-in-this-case.-so-you-can-just-fit-the-arima-model-on-the-stationary-time-series-data.-if-it-is-still-non-stationary-the-possible-reason-is-that-seasonality-has-significant-effect-e.g.-seasonal-random-walk.-then-you-need-to-remove-seasonality-from-the-time-series-data.}
+
+\paragraph{Luckily, we have SARIMA (seasonal ARIMA) model that can
+automatically fit the seasonality of time series data. If you are
+interested in it, you can refer to the
+link.}\label{luckily-we-have-sarima-seasonal-arima-model-that-can-automatically-fit-the-seasonality-of-time-series-data.-if-you-are-interested-in-it-you-can-refer-to-the-link.}
+
+References:
+https://www.statsmodels.org/dev/generated/statsmodels.tsa.statespace.sarimax.SARIMAX.html
+
+    \paragraph{(Optional) About
+seasonality}\label{optional-about-seasonality}
+
+\subparagraph{Whether seasonality effect is
+significant:}\label{whether-seasonality-effect-is-significant}
+
+\begin{itemize}
+\tightlist
+\item
+  Observing using your eyes
+\item
+  ACF plot
+\item
+  Example of significant seaonality:
+\item
+  Example 1: 
+\item
+  Example 2: 
+\end{itemize}
+
+\subparagraph{How to remove/control seasonality
+effect:}\label{how-to-removecontrol-seasonality-effect}
+
+\begin{itemize}
+\tightlist
+\item
+  By differencing:
+  https://www.stat.berkeley.edu/\textasciitilde{}gido/Removal\%20of\%20Trend\%20and\%20Seasonality.pdf
+\item
+  By adding seasonality dummy variables:
+  https://www.ssc.wisc.edu/\textasciitilde{}bhansen/390/390Lecture14.pdf
+  and http://faculty.washington.edu/htamura/qm530/cases/seasonality.ppt
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Evaluating the Residuals for Stationary}
+         \PY{n}{data\PYZus{}decompose} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{residual}\PY{p}{)}
+         \PY{n}{data\PYZus{}decompose}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n}{t}\PY{o}{=}\PY{l+m+mi}{30} \PY{c+c1}{\PYZsh{} Rolling time window, and calculate mean and standard error}
+         \PY{n}{rolmean} \PY{o}{=} \PY{n}{data\PYZus{}decompose}\PY{o}{.}\PY{n}{rolling}\PY{p}{(}\PY{n}{window}\PY{o}{=}\PY{n}{t}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{rolstd} \PY{o}{=} \PY{n}{data\PYZus{}decompose}\PY{o}{.}\PY{n}{rolling}\PY{p}{(}\PY{n}{window}\PY{o}{=}\PY{n}{t}\PY{p}{)}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Visualize whether mean and standard error of time series are stationary over time}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{orig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data\PYZus{}decompose}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original Residuals}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{mean} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{rolmean}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rolling Mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{std} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{rolstd}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rolling Std}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rolling Mean \PYZam{} Standard Deviation of Residuals}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{n}{block}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Dicky\PYZhy{}Fuller test on stationary condition}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Results of Dickey\PYZhy{}Fuller Test:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Dickey\PYZhy{}Fuller test}
+         \PY{n}{dftest} \PY{o}{=} \PY{n}{adfuller}\PY{p}{(}\PY{n}{data\PYZus{}decompose}\PY{p}{,} \PY{n}{autolag}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)} 
+         \PY{n}{dfoutput} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{dftest}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Statistic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p\PYZhy{}value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}Lags Used}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Observations Used}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{key}\PY{p}{,} \PY{n}{value} \PY{o+ow}{in} \PY{n}{dftest}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{dfoutput}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Critical Value (}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{)}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{k}{key}] = value
+         
+         \PY{n+nb}{print} \PY{p}{(}\PY{n}{dfoutput}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Results of Dickey-Fuller Test:
+Test Statistic                  -4.801441
+p-value                          0.000054
+\#Lags Used                      14.000000
+Number of Observations Used    147.000000
+Critical Value (1\%)             -3.475637
+Critical Value (5\%)             -2.881410
+Critical Value (10\%)            -2.577365
+dtype: float64
+
+    \end{Verbatim}
+
+    \paragraph{The residuals are stationary, but residuals may not seem like
+random noise (i.e., standard normal distribution). This is not a big
+issue. As long as the series become stationary now, you can fit the time
+series with time series model, such as ARMA or ARIMA. If you verify that
+variance may change within short-term periods, you can use models such
+as ARCH or GARCH to fit such
+residuals.}\label{the-residuals-are-stationary-but-residuals-may-not-seem-like-random-noise-i.e.-standard-normal-distribution.-this-is-not-a-big-issue.-as-long-as-the-series-become-stationary-now-you-can-fit-the-time-series-with-time-series-model-such-as-arma-or-arima.-if-you-verify-that-variance-may-change-within-short-term-periods-you-can-use-models-such-as-arch-or-garch-to-fit-such-residuals.}
+
+\paragraph{If you want to know whether your stationary residual series
+have autocorrelation issue, you can visualize it using Autocorrelation
+Function (ACF), or check with statistical tests (In tutorial
+5).}\label{if-you-want-to-know-whether-your-stationary-residual-series-have-autocorrelation-issue-you-can-visualize-it-using-autocorrelation-function-acf-or-check-with-statistical-tests-in-tutorial-5.}
+
+    \paragraph{2.3.4 (Optional) Autocorrelation Function and Partial
+Autocorrelation
+Function}\label{optional-autocorrelation-function-and-partial-autocorrelation-function}
+
+Autocorrelation function (ACF) determines the correlation of time series
+along with a lagged version of itself. Partial autocorrelation function
+(PACF) also measures the correlation of a time series along with a
+lagged version of itself except that it eliminates the variations
+already explained by the prior comparisons. You may check the references
+and see the differences between them.
+
+You can also use Durbin-Watson Test and Portmanteau Test to verify
+whether autocorrelation exists.
+
+References: * https://onlinecourses.science.psu.edu/stat510/node/62/ *
+https://onlinecourses.science.psu.edu/stat510/node/60/ * Why we say
+partial correlation is very similar to regression coefficients:
+http://www.ernestoamaral.com/docs/soci420-17fall/Lecture24.pdf * ACF and
+PACF:
+https://machinelearningmastery.com/gentle-introduction-autocorrelation-partial-autocorrelation/
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} Plotting Correlograms for ACF/PACF on Residuals}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax1} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{211}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{graphics}\PY{o}{.}\PY{n}{tsa}\PY{o}{.}\PY{n}{plot\PYZus{}acf}\PY{p}{(}\PY{n}{data\PYZus{}decompose}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{lags}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax1}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ax2 = plt.subplot(212)}
+         \PY{c+c1}{\PYZsh{}fig = sm.graphics.tsa.plot\PYZus{}pacf(data\PYZus{}decompose, lags=40, ax=ax2)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{Only the first-order autocorrelation may be significant
+(i.e., correlation of current residual and lag-1 of residual is
+high).}\label{only-the-first-order-autocorrelation-may-be-significant-i.e.-correlation-of-current-residual-and-lag-1-of-residual-is-high.}
+
+    \paragraph{2.3.5 Time Series Forecasting with Autoregression and Moving
+Average
+(ARMA)}\label{time-series-forecasting-with-autoregression-and-moving-average-arma}
+
+\paragraph{After you transform your original non-stationary time series
+to stationary time series, you can fit ARMA or ARIMA model on this
+stationary time
+series.}\label{after-you-transform-your-original-non-stationary-time-series-to-stationary-time-series-you-can-fit-arma-or-arima-model-on-this-stationary-time-series.}
+
+\textbf{Autoregression Intuition} * Consider a time series that was
+generated by an autoregression (AR) process with a lag of k. * We know
+that the ACF describes the autocorrelation between an observation and
+another observation at a prior time step that includes direct and
+indirect dependence information. * This means we would expect the ACF
+for the AR(k) time series to be strong to a lag of k and the inertia of
+that relationship would carry on to subsequent lag values, trailing off
+at some point as the effect was weakened. * We know that the PACF only
+describes the direct relationship between an observation and its lag.
+This would suggest that there would be no correlation for lag values
+beyond k. * This is exactly the expectation of the ACF and PACF plots
+for an AR(k) process.
+
+\textbf{Moving Average Intuition} * Consider a time series that was
+generated by a moving average (MA) process with a lag of k. * Remember
+that the moving average process is an autoregression model of the time
+series of residual errors from prior predictions. Another way to think
+about the moving average model is that it corrects future forecasts
+based on errors made on recent forecasts. * We would expect the ACF for
+the MA(k) process to show a strong correlation with recent values up to
+the lag of k, then a sharp decline to low or no correlation. By
+definition, this is how the process was generated. * For the PACF, we
+would expect the plot to show a strong relationship to the lag and a
+trailing off of correlation from the lag onwards. * Again, this is
+exactly the expectation of the ACF and PACF plots for an MA(k) process.
+
+References: * Why we say partial correlation is very similar to
+regression coefficients:
+http://www.ernestoamaral.com/docs/soci420-17fall/Lecture24.pdf * ACF and
+PACF:
+https://machinelearningmastery.com/gentle-introduction-autocorrelation-partial-autocorrelation/
+* Moving Average:
+https://mcs.utm.utoronto.ca/\textasciitilde{}nosedal/sta457/ma1-and-ma2.pdf
+and
+https://datamfr.files.wordpress.com/2012/10/acf-and-pacf-arima-models.pdf
+* \texttt{statsmodels}:
+https://www.statsmodels.org/dev/generated/statsmodels.tsa.arima\_model.ARIMA.html
+and
+https://www.statsmodels.org/dev/generated/statsmodels.tsa.arima\_model.ARIMA.fit.html\#statsmodels.tsa.arima\_model.ARIMA.fit
+
+    \paragraph{ARIMA model is an ARMA model allowing for differencing on the
+original data. In this example, we directly fit an ARIMA model on the
+original non-stationary time
+series.}\label{arima-model-is-an-arma-model-allowing-for-differencing-on-the-original-data.-in-this-example-we-directly-fit-an-arima-model-on-the-original-non-stationary-time-series.}
+
+\paragraph{Remember that in this case, after first-differencing on the
+original time series, we get a stationary series. So we can directly
+apply ARIMA model on the original
+data.}\label{remember-that-in-this-case-after-first-differencing-on-the-original-time-series-we-get-a-stationary-series.-so-we-can-directly-apply-arima-model-on-the-original-data.}
+
+References:
+https://en.wikipedia.org/wiki/Autoregressive\_integrated\_moving\_average
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} Suppose we use ARIMA(p,d,q) to fit the time series data: AR(p), MA(q) and d\PYZhy{}order\PYZhy{}differencing}
+         \PY{c+c1}{\PYZsh{} Remember: we have tested that first\PYZhy{}order\PYZhy{}differencing is effective enough to make non\PYZhy{}stationary to stationary }
+         \PY{c+c1}{\PYZsh{} Here we can use ARIMA model, which fits ARMA model on (first\PYZhy{}order) differencing time series data}
+         \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{tsa}\PY{n+nn}{.}\PY{n+nn}{arima\PYZus{}model} \PY{k}{import} \PY{n}{ARIMA}
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         
+         \PY{c+c1}{\PYZsh{} ARIMA(5, 1, 5): AR(5), MA(5) and first\PYZhy{}order\PYZhy{}differencing}
+         \PY{n}{model} \PY{o}{=} \PY{n}{ARIMA}\PY{p}{(}\PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{order}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{model\PYZus{}fit} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{disp}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{n}{model\PYZus{}fit}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Find AIC value}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{AIC is: }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{model\PYZus{}fit}\PY{o}{.}\PY{n}{aic}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot residual errors series}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{residuals} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{model\PYZus{}fit}\PY{o}{.}\PY{n}{resid}\PY{p}{)}
+         \PY{n}{residuals}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot distribution of residual errors}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{n}{hist}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{kde}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{darkblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{hist\PYZus{}kws}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{edgecolor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{kde\PYZus{}kws}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linewidth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{4}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:            D.Adj Close   No. Observations:                  175
+Model:                 ARIMA(5, 1, 5)   Log Likelihood                -657.330
+Method:                       css-mle   S.D. of innovations             10.135
+Date:                Fri, 28 Sep 2018   AIC                           1338.661
+Time:                        13:13:35   BIC                           1376.638
+Sample:                             1   HQIC                          1354.066
+                                                                              
+=====================================================================================
+                        coef    std err          z      P>|z|      [0.025      0.975]
+-------------------------------------------------------------------------------------
+const                 1.2173      0.137      8.897      0.000       0.949       1.485
+ar.L1.D.Adj Close     0.8832      0.097      9.103      0.000       0.693       1.073
+ar.L2.D.Adj Close    -0.2220      0.160     -1.391      0.166      -0.535       0.091
+ar.L3.D.Adj Close     0.2851      0.110      2.583      0.011       0.069       0.501
+ar.L4.D.Adj Close    -0.9618      0.049    -19.657      0.000      -1.058      -0.866
+ar.L5.D.Adj Close     0.8194      0.066     12.357      0.000       0.689       0.949
+ma.L1.D.Adj Close    -1.0716      0.077    -13.903      0.000      -1.223      -0.921
+ma.L2.D.Adj Close     0.2889      0.144      2.003      0.047       0.006       0.572
+ma.L3.D.Adj Close    -0.2889      0.141     -2.055      0.041      -0.564      -0.013
+ma.L4.D.Adj Close     1.0716      0.077     13.993      0.000       0.922       1.222
+ma.L5.D.Adj Close    -1.0000      0.064    -15.590      0.000      -1.126      -0.874
+                                    Roots                                    
+=============================================================================
+                  Real          Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -0.6599           -0.7615j            1.0077           -0.3636
+AR.2           -0.6599           +0.7615j            1.0077            0.3636
+AR.3            0.6955           -0.7786j            1.0440           -0.1340
+AR.4            0.6955           +0.7786j            1.0440            0.1340
+AR.5            1.1027           -0.0000j            1.1027           -0.0000
+MA.1           -0.6499           -0.7600j            1.0000           -0.3626
+MA.2           -0.6499           +0.7600j            1.0000            0.3626
+MA.3            0.6857           -0.7278j            1.0000           -0.1297
+MA.4            0.6857           +0.7278j            1.0000            0.1297
+MA.5            1.0000           -0.0000j            1.0000           -0.0000
+-----------------------------------------------------------------------------
+AIC is: 1338.6609969483375
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<Figure size 432x288 with 0 Axes>
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1e65a629d68>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{Sometimes you may get the error message: "The computed
+initial AR coefficients are not stationary You should induce
+stationarity, choose a different model order, or you can pass your own
+start\_params." It means after de-trending, your time series data may
+still be non-stationary (i.e., seasonality may have significant effect).
+Then you can try SARIMA (seasonal ARIMA) model to fit the
+data.}\label{sometimes-you-may-get-the-error-message-the-computed-initial-ar-coefficients-are-not-stationary-you-should-induce-stationarity-choose-a-different-model-order-or-you-can-pass-your-own-start_params.-it-means-after-de-trending-your-time-series-data-may-still-be-non-stationary-i.e.-seasonality-may-have-significant-effect.-then-you-can-try-sarima-seasonal-arima-model-to-fit-the-data.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} We can do a grid search on selecting autoregressive order or moving average order in ARIMA model}
+         \PY{c+c1}{\PYZsh{} Select the model with best performance}
+         \PY{c+c1}{\PYZsh{} Remember usually you need to further split training data to do validation, and find the model with best validation accuracy. }
+         \PY{c+c1}{\PYZsh{} In this example, in order to simply and quickly illustrate the procedure of time series modelling, we ignore this step.}
+         \PY{n}{p\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}\PY{p}{]} \PY{c+c1}{\PYZsh{} AR order}
+         \PY{n}{best\PYZus{}AIC} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} You need to minimize AIC}
+         \PY{n}{best\PYZus{}model} \PY{o}{=} \PY{k+kc}{None} \PY{c+c1}{\PYZsh{} Model with lowest AIC}
+         
+         \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{p\PYZus{}list}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} ARIMA(p, 1, 1): AR(p), MA(1) and first\PYZhy{}order\PYZhy{}differencing}
+             \PY{n}{model} \PY{o}{=} \PY{n}{ARIMA}\PY{p}{(}\PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{order}\PY{o}{=}\PY{p}{(}\PY{n}{p}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model\PYZus{}fit} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{disp}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 
+             \PY{k}{if} \PY{n}{model\PYZus{}fit}\PY{o}{.}\PY{n}{aic} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{best\PYZus{}AIC}\PY{p}{:}
+                 \PY{n}{best\PYZus{}model}\PY{p}{,} \PY{n}{best\PYZus{}AIC} \PY{o}{=} \PY{n}{model}\PY{p}{,} \PY{n}{model\PYZus{}fit}\PY{o}{.}\PY{n}{aic}
+\end{Verbatim}
+
+
+    \paragraph{Sometimes you may get the error message: "The computed
+initial AR coefficients are not stationary You should induce
+stationarity, choose a different model order, or you can pass your own
+start\_params." It means after de-trending, your time series data may
+still be non-stationary (i.e., seasonality may have significant effect).
+Then you can try SARIMA (seasonal ARIMA) model to fit the
+data.}\label{sometimes-you-may-get-the-error-message-the-computed-initial-ar-coefficients-are-not-stationary-you-should-induce-stationarity-choose-a-different-model-order-or-you-can-pass-your-own-start_params.-it-means-after-de-trending-your-time-series-data-may-still-be-non-stationary-i.e.-seasonality-may-have-significant-effect.-then-you-can-try-sarima-seasonal-arima-model-to-fit-the-data.}
+
+    \subsubsection{In-sample forecasting: Whether model fits training data
+well}\label{in-sample-forecasting-whether-model-fits-training-data-well}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{best\PYZus{}model\PYZus{}fit} \PY{o}{=} \PY{n}{best\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{disp}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{best\PYZus{}model\PYZus{}fit}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+         \PY{n}{best\PYZus{}model\PYZus{}fit}\PY{o}{.}\PY{n}{plot\PYZus{}predict}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} Visualize in\PYZhy{}sample forecasting: Whether model fits training data well}
+         \PY{c+c1}{\PYZsh{} best\PYZus{}model\PYZus{}fit.predict(typ=\PYZsq{}levels\PYZsq{}) \PYZsh{} In\PYZhy{}sample fitted values}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}20}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Out-of-sample Forecasting: Prediction using test data:
+calculate RMSE on test
+data}\label{out-of-sample-forecasting-prediction-using-test-data-calculate-rmse-on-test-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} Out\PYZhy{}of\PYZhy{}sample Forcasting: Prediction using test data: calculate RMSE on test data}
+         \PY{c+c1}{\PYZsh{} https://www.statsmodels.org/dev/generated/statsmodels.tsa.arima\PYZus{}model.ARMAResults.forecast.html}
+         \PY{k+kn}{from} \PY{n+nn}{copy} \PY{k}{import} \PY{n}{deepcopy}
+         \PY{n}{y\PYZus{}hat\PYZus{}test} \PY{o}{=} \PY{n}{deepcopy}\PY{p}{(}\PY{n}{data\PYZus{}test}\PY{p}{)}
+         \PY{n}{y\PYZus{}hat\PYZus{}test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{best\PYZus{}model\PYZus{}fit}\PY{o}{.}\PY{n}{forecast}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}test}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Plot}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data\PYZus{}test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{y\PYZus{}hat\PYZus{}test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Forecasting RMSE: }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y\PYZus{}hat\PYZus{}test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{y\PYZus{}hat\PYZus{}test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}hat\PYZus{}test}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} Rolling forecast using test data: calculate RMSE on test data}
+         \PY{c+c1}{\PYZsh{} A rolling forecast is required given the dependence on observations in prior time steps for differencing and the AR model. }
+         \PY{c+c1}{\PYZsh{} A crude way to perform this rolling forecast is to re\PYZhy{}create the ARIMA model after each new observation is received.}
+         \PY{c+c1}{\PYZsh{} https://robjhyndman.com/hyndsight/tscv/}
+         \PY{c+c1}{\PYZsh{} https://www.statsmodels.org/dev/generated/statsmodels.tsa.arima\PYZus{}model.ARMAResults.forecast.html}
+         \PY{k+kn}{from} \PY{n+nn}{copy} \PY{k}{import} \PY{n}{deepcopy}
+         \PY{n}{y\PYZus{}hat\PYZus{}test} \PY{o}{=} \PY{n}{deepcopy}\PY{p}{(}\PY{n}{data\PYZus{}test}\PY{p}{)}
+         
+         \PY{n}{history} \PY{o}{=} \PY{p}{[}\PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{deepcopy}\PY{p}{(}\PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+         \PY{n}{predictions} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+         \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}hat\PYZus{}test}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{model} \PY{o}{=} \PY{n}{ARIMA}\PY{p}{(}\PY{n}{history}\PY{p}{,} \PY{n}{order}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model\PYZus{}fit} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{disp}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{output} \PY{o}{=} \PY{n}{model\PYZus{}fit}\PY{o}{.}\PY{n}{forecast}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} Forecast the next instance}
+             \PY{n}{yhat} \PY{o}{=} \PY{n}{output}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{predictions}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{yhat}\PY{p}{)}
+             \PY{n}{obs} \PY{o}{=} \PY{n}{y\PYZus{}hat\PYZus{}test}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{t}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{c+c1}{\PYZsh{} first = history.pop(0) \PYZsh{} You can moving the training time window to keep time window fixed}
+             \PY{n}{history}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{obs}\PY{p}{)} \PY{c+c1}{\PYZsh{} Update the training data to forecast the next instance}
+         
+         \PY{n}{y\PYZus{}hat\PYZus{}test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{predictions}
+             
+         \PY{c+c1}{\PYZsh{} Plot}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data\PYZus{}test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{y\PYZus{}hat\PYZus{}test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rolling Forecasting RMSE: }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y\PYZus{}hat\PYZus{}test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{y\PYZus{}hat\PYZus{}test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}hat\PYZus{}test}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{You can see that (k-step) rolling forecasting gives better
+prediction accuracy. In fact, you can view rolling forecasting as
+"cross-validation" of time series
+data.}\label{you-can-see-that-k-step-rolling-forecasting-gives-better-prediction-accuracy.-in-fact-you-can-view-rolling-forecasting-as-cross-validation-of-time-series-data.}
+
+References: https://robjhyndman.com/hyndsight/tscv/
+
+    \paragraph{2.3.6 (Optional) Alternative Time Series
+Models}\label{optional-alternative-time-series-models}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{SARIMA} (Seasonal Autoregressive Integrated Moving Average):
+  As introduced above, this method addresses seasonality issue when
+  seasonablity is a significant reason for non-stationarity.
+\item
+  \textbf{ARCH} (Autoregressive conditional heteroskedasticity) and
+  \textbf{GARCH} (Generalized autoregressive conditional
+  heteroskedasticity):
+  https://en.wikipedia.org/wiki/Autoregressive\_conditional\_heteroskedasticity
+  and https://arch.readthedocs.io/en/latest/index.html
+\item
+  \textbf{ARIMAX} (ARIMA model with regressors/predictors):
+  http://www.statsmodels.org/dev/generated/statsmodels.tsa.arima\_model.ARIMA.html
+  and https://pyflux.readthedocs.io/en/latest/arimax.html
+\end{itemize}
+
+    \paragraph{2.3.7 (Optional) Ensemble Method of Time Series
+Models}\label{optional-ensemble-method-of-time-series-models}
+
+\paragraph{To improve prediction accuracy, you can use ensemble method
+of multiple time series
+models}\label{to-improve-prediction-accuracy-you-can-use-ensemble-method-of-multiple-time-series-models}
+
+References: * https://arxiv.org/ftp/arxiv/papers/1302/1302.6595.pdf *
+https://ieeexplore.ieee.org/document/6011011
+
+    \subsection{3 Recap: A typical procedure of time series
+forecasting}\label{recap-a-typical-procedure-of-time-series-forecasting}
+
+\begin{figure}
+\centering
+\includegraphics{procedure.jpg}
+\caption{title}
+\end{figure}
+
+    \subsection{4 Assignments (5 points)}\label{assignments-5-points}
+
+    \textbf{Purpose: Learn how to do simple analysis on time series data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} Import libraries}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{n}{sqrt}
+         \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Image}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pylab} \PY{k}{import} \PY{n}{rcParams}
+         \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{tsa}\PY{n+nn}{.}\PY{n+nn}{stattools} \PY{k}{import} \PY{n}{adfuller}
+         \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{tsa}\PY{n+nn}{.}\PY{n+nn}{stattools} \PY{k}{import} \PY{n}{acf}\PY{p}{,} \PY{n}{pacf}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
+         \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{tsa}\PY{n+nn}{.}\PY{n+nn}{arima\PYZus{}model} \PY{k}{import} \PY{n}{ARMA}\PY{p}{,} \PY{n}{ARIMA}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{explained\PYZus{}variance\PYZus{}score}
+         \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k}{import} \PY{n}{division}\PY{p}{,} \PY{n}{print\PYZus{}function}
+         \PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k}{import} \PY{n}{datetime}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \paragraph{Dataset:}\label{dataset}
+
+The Google Inc. stock price can be obtained from yahoo finance
+https://sg.finance.yahoo.com/quote/GOOG/history?p=GOOG.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} Load dataset: You need to download Google stock price from yahoo finance}
+         \PY{o}{\PYZpc{}}\PY{k}{pwd}
+         \PY{n}{google} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./GOOG.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Transform Date column to date type}
+         \PY{n}{google}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{google}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}
+         \PY{n}{google}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{google}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{infer\PYZus{}datetime\PYZus{}format}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{google}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{n}{n}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:}         Date   Adj Close
+         0 2017-01-03  786.140015
+         1 2017-01-04  786.900024
+         2 2017-01-05  794.020020
+         3 2017-01-06  806.150024
+         4 2017-01-09  806.650024
+         5 2017-01-10  804.789978
+         6 2017-01-11  807.909973
+         7 2017-01-12  806.359985
+         8 2017-01-13  807.880005
+         9 2017-01-17  804.609985
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} Split the dataset: First 70\PYZpc{} for training, Last 30\PYZpc{} for testing}
+         \PY{n}{google\PYZus{}size} \PY{o}{=} \PY{n}{google}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{google\PYZus{}train} \PY{o}{=} \PY{n}{google}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{n}{google\PYZus{}size}\PY{o}{*}\PY{l+m+mf}{0.7}\PY{p}{]}
+         \PY{n}{google\PYZus{}test} \PY{o}{=} \PY{n}{google}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{google\PYZus{}size}\PY{o}{*}\PY{l+m+mf}{0.7}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} Plotting Adjusted Closing Price of Google Stock on a Time Series}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{google}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{google}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adjusted Closing Index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Google Inc. Adjusted Closing Price \PYZhy{} Year 2017}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{locs}\PY{p}{,} \PY{n}{labels} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{setp}\PY{p}{(}\PY{n}{labels}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{45}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_57_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{Question 1. Do you think this is a stationary time series? (1
+point)}
+
+Hint: * Dickey-Fuller Test on \texttt{google\_train} training data
+
+\begin{itemize}
+\tightlist
+\item
+  Sample code:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Dicky-Fuller test on stationary condition}
+\BuiltInTok{print}\NormalTok{ (}\StringTok{'Results of Dickey-Fuller Test:'}\NormalTok{)}
+
+\CommentTok{# Dickey-Fuller test}
+\NormalTok{dftest }\OperatorTok{=}\NormalTok{ adfuller(data_train[}\StringTok{'Adj Close'}\NormalTok{], autolag}\OperatorTok{=}\VariableTok{None}\NormalTok{) }
+\NormalTok{dfoutput }\OperatorTok{=}\NormalTok{ pd.Series(dftest[}\DecValTok{0}\NormalTok{:}\DecValTok{4}\NormalTok{], index}\OperatorTok{=}\NormalTok{[}\StringTok{'Test Statistic'}\NormalTok{,}\StringTok{'p-value'}\NormalTok{,}\StringTok{'#Lags Used'}\NormalTok{,}\StringTok{'Number of Observations Used'}\NormalTok{])}
+
+\ControlFlowTok{for}\NormalTok{ key, value }\KeywordTok{in}\NormalTok{ dftest[}\DecValTok{4}\NormalTok{].items():}
+\NormalTok{    dfoutput[}\StringTok{'Critical Value (}\SpecialCharTok{%s}\StringTok{)'}\OperatorTok{%}\NormalTok{key] }\OperatorTok{=}\NormalTok{ value}
+
+\BuiltInTok{print}\NormalTok{ (dfoutput)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Note: Please interpret your results.}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} Your interpretation of Dickey\PYZhy{}Fuller test}
+        
+        \PY{n}{Answer}\PY{p}{:} 
+\end{Verbatim}
+
+
+    \textbf{Question 2. De-trend time series data using first differencing
+method, and Redo Dickey-Fuller test (2 points)}
+
+Hint: * First differencing on \texttt{google\_train} * Dickey-Fuller
+test on first-differenced data * Sample code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Applying First-Order Differencing to the original time series data}
+\NormalTok{data_diff }\OperatorTok{=}\NormalTok{ data_train[}\StringTok{'Adj Close'}\NormalTok{] }\OperatorTok{-}\NormalTok{ data_train[}\StringTok{'Adj Close'}\NormalTok{].shift(}\DecValTok{1}\NormalTok{)}
+\NormalTok{data_diff.dropna(inplace}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+
+\CommentTok{# Dicky-Fuller test on stationary condition}
+\BuiltInTok{print}\NormalTok{ (}\StringTok{'Results of Dickey-Fuller Test:'}\NormalTok{)}
+
+\CommentTok{# Dickey-Fuller test}
+\NormalTok{dftest }\OperatorTok{=}\NormalTok{ adfuller(data_diff, autolag}\OperatorTok{=}\VariableTok{None}\NormalTok{) }
+\NormalTok{dfoutput }\OperatorTok{=}\NormalTok{ pd.Series(dftest[}\DecValTok{0}\NormalTok{:}\DecValTok{4}\NormalTok{], index}\OperatorTok{=}\NormalTok{[}\StringTok{'Test Statistic'}\NormalTok{,}\StringTok{'p-value'}\NormalTok{,}\StringTok{'#Lags Used'}\NormalTok{,}\StringTok{'Number of Observations Used'}\NormalTok{])}
+
+\ControlFlowTok{for}\NormalTok{ key, value }\KeywordTok{in}\NormalTok{ dftest[}\DecValTok{4}\NormalTok{].items():}
+\NormalTok{    dfoutput[}\StringTok{'Critical Value (}\SpecialCharTok{%s}\StringTok{)'}\OperatorTok{%}\NormalTok{key] }\OperatorTok{=}\NormalTok{ value}
+
+\BuiltInTok{print}\NormalTok{ (dfoutput)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Note: Please interpret your results.}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} Your interpretation of Dickey\PYZhy{}Fuller test after doing first\PYZhy{}differencing on the original time series data}
+        
+        \PY{n}{Answer}\PY{p}{:} 
+\end{Verbatim}
+
+
+    \textbf{Question 3. Run an ARIMA(2,1,1) model on original time series
+data, and forecast what is the next value (2 points)}
+
+Hint: * ARIMA(2,1,1): AR(2), MA(1) and first-differencing; p=2, q=1, d=1
+for ARIMA(p,d,q) * Sample code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Suppose we use ARIMA(5,1,2) to fit the log-transformed time series data: AR(5), MA(2) and first-order-differencing}
+\CommentTok{# Remember: we have tested that first-order-differencing is effective enough to remove trending. }
+\ImportTok{from}\NormalTok{ statsmodels.tsa.arima_model }\ImportTok{import}\NormalTok{ ARIMA}
+\ImportTok{import}\NormalTok{ seaborn }\ImportTok{as}\NormalTok{ sns}
+
+\CommentTok{# AR(5), MA(2) and first-order-differencing}
+\NormalTok{model }\OperatorTok{=}\NormalTok{ ARIMA(data_train[}\StringTok{'Adj Close'}\NormalTok{], order}\OperatorTok{=}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\NormalTok{model_fit }\OperatorTok{=}\NormalTok{ model.fit(disp}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+
+\CommentTok{# Print model results}
+\BuiltInTok{print}\NormalTok{ (model_fit.summary()) }
+
+\CommentTok{# Find AIC value}
+\BuiltInTok{print}\NormalTok{ (}\StringTok{"AIC is: }\SpecialCharTok{%s}\StringTok{"} \OperatorTok{%}\NormalTok{(model_fit.aic))}
+
+\CommentTok{# Predict/Forecast what is the next value}
+\NormalTok{yhat }\OperatorTok{=}\NormalTok{ model_fit.forecast()[}\DecValTok{0}\NormalTok{][}\DecValTok{0}\NormalTok{] }\CommentTok{# Forecast the next instance}
+\BuiltInTok{print}\NormalTok{ (}\StringTok{"Predicted next value: }\SpecialCharTok{%s}\StringTok{"} \OperatorTok{%}\NormalTok{(yhat))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Note 1: Please print out your ARIMA model results (with AIC
+  value).}
+\item
+  \textbf{Note 2: Please print out your predicted value of next time
+  period.}
+\end{itemize}
+
+References:
+https://www.statsmodels.org/dev/generated/statsmodels.tsa.arima\_model.ARIMA.html
+
+    \subsection{5 References}\label{references}
+
+{[}1{]} Haroon, D. Python Machine Learning Case Studies. Apress..
+{[}2{]} statsmodels module: https://www.statsmodels.org/dev/tsa.html
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
