@@ -1,0 +1,2 @@
+100: 3 backtests
+90-95: complete everything, see that you have tried
