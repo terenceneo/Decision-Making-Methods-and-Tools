@@ -1,5 +1,5 @@
 # Decision-Making-Methods-and-Tools
-My journey learning about data mining techniques and models.
+Data mining techniques and models tutorials
 </br></br><strong> Topics Covered thus far:</strong>
 </br>1. Numpy, Pandas and Decision Tree
 </br>2. Linear and Logistic Regression
